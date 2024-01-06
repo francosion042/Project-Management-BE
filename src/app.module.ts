@@ -8,6 +8,7 @@ import { UserModule } from './modules/user/user.module';
 import { EnvConfigService } from './config/services/env.service';
 import { DataSource } from 'typeorm';
 import { addTransactionalDataSource } from 'typeorm-transactional';
+import { UserController } from './modules/user/user.controller';
 
 @Module({
   imports: [
@@ -30,7 +31,7 @@ import { addTransactionalDataSource } from 'typeorm-transactional';
     AuthModule,
     UserModule,
   ],
-  controllers: [AppController],
+  controllers: [AppController, UserController],
   providers: [AppService],
 })
 export class AppModule {}

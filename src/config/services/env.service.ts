@@ -4,7 +4,7 @@ import { type TypeOrmModuleOptions } from '@nestjs/typeorm';
 import { isNil } from 'lodash';
 import { default as parse, type Units } from 'parse-duration';
 import { SnakeNamingStrategy } from '../../snake-naming.strategy';
-import { UserSubscriber } from '../../entity-subscribers/user-subscriber';
+import { UserSubscriber } from '../../modules/user/user.subscriber';
 
 @Injectable()
 export class EnvConfigService {
