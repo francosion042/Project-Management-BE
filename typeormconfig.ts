@@ -5,7 +5,7 @@ import { SnakeNamingStrategy } from './src/snake-naming.strategy';
 
 dotenv.config();
 
-export default new DataSource({
+const dataSource = new DataSource({
   type: 'postgres',
   host: process.env.DB_HOST,
   port: Number(process.env.DB_PORT),
@@ -20,3 +20,5 @@ export default new DataSource({
   ],
   migrations: ['src/database/migrations/*{.ts,.js}'],
 });
+
+export default dataSource;
