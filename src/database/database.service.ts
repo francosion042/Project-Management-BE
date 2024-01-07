@@ -1,7 +1,5 @@
 import { Injectable } from '@nestjs/common';
 import type { TypeOrmModuleOptions } from '@nestjs/typeorm';
-import { UserSubscriber } from '../modules/user/user.subscriber';
-import { SnakeNamingStrategy } from '../snake-naming.strategy';
 import { EnvConfigService } from '../envConfig/envConfig.service';
 
 @Injectable()
@@ -13,10 +11,12 @@ export class DatabaseService {
       __dirname + '/../modules/**/*.view-entity{.ts,.js}',
     ];
     const migrations = [__dirname + '/migrations/*{.ts,.js}'];
+    const subscribers = [__dirname + '/../modules/**/*.subscriber{.ts,.js}'];
 
     return {
       entities,
       migrations,
+      subscribers,
       keepConnectionAlive: !this.envConfig.isTest,
       dropSchema: this.envConfig.isTest,
       type: 'postgres',
@@ -25,10 +25,8 @@ export class DatabaseService {
       username: this.envConfig.getString('DB_USERNAME'),
       password: this.envConfig.getString('DB_PASSWORD'),
       database: this.envConfig.getString('DB_NAME'),
-      subscribers: [UserSubscriber],
       migrationsRun: true,
       logging: this.envConfig.getBoolean('ENABLE_ORM_LOGS'),
-      namingStrategy: new SnakeNamingStrategy(),
     };
   }
 }
