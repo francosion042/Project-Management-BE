@@ -20,6 +20,9 @@ export class AuthService {
 
     return user;
   }
+  async register(body: object) {
+    return body;
+  }
 
   async login(user: any) {
     const payload = { email: user.email, sub: user.id };

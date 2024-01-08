@@ -25,7 +25,7 @@ export class DatabaseService {
       username: this.envConfig.getString('DB_USERNAME'),
       password: this.envConfig.getString('DB_PASSWORD'),
       database: this.envConfig.getString('DB_NAME'),
-      migrationsRun: true,
+      migrationsRun: this.envConfig.isProduction,
       logging: this.envConfig.getBoolean('ENABLE_ORM_LOGS'),
     };
   }

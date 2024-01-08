@@ -1,18 +1,23 @@
-import { Controller, Post, UseGuards } from '@nestjs/common';
+import { Controller, HttpCode, Post, Req, UseGuards, UseInterceptors } from '@nestjs/common';
+import { Request } from 'express';
 import { AuthService } from './auth.service';
 import { LocalAuthGuard } from './local-auth.guard';
+import { NoFilesInterceptor } from '@nestjs/platform-express';
 
 @Controller('auth')
 export class AuthController {
   constructor(private authService: AuthService) {}
 
   @Post('register')
-  async register({ req }: { req: any }) {
-    return this.authService.login(req.user);
+  @UseInterceptors(NoFilesInterceptor())
+  async register(@Req() request: Request) {
+    console.log(request.body);
+    return this.authService.register(request.body);
   }
   @UseGuards(LocalAuthGuard)
   @Post('login')
-  async login({ req }: { req: any }) {
-    return this.authService.login(req.user);
+  @HttpCode(200)
+  async login(@Req() request: Request) {
+    return this.authService.login(request.user);
   }
 }
