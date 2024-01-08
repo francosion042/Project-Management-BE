@@ -1,4 +1,4 @@
-import bcrypt from 'bcrypt';
+import { hashSync, compare } from 'bcrypt';
 
 /**
  * generate hash from password or string
@@ -6,7 +6,7 @@ import bcrypt from 'bcrypt';
  * @returns {string}
  */
 export function generateHash(password: string): string {
-  return bcrypt.hashSync(password, 10);
+  return hashSync(password, 10);
 }
 
 /**
@@ -23,5 +23,5 @@ export function validateHash(
     return Promise.resolve(false);
   }
 
-  return bcrypt.compare(password, hash);
+  return compare(password, hash);
 }

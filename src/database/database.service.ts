@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import type { TypeOrmModuleOptions } from '@nestjs/typeorm';
 import { EnvConfigService } from '../envConfig/envConfig.service';
+import { SnakeNamingStrategy } from '../snake-naming.strategy';
 
 @Injectable()
 export class DatabaseService {
@@ -27,6 +28,7 @@ export class DatabaseService {
       database: this.envConfig.getString('DB_NAME'),
       migrationsRun: this.envConfig.isProduction,
       logging: this.envConfig.getBoolean('ENABLE_ORM_LOGS'),
+      namingStrategy: new SnakeNamingStrategy(),
     };
   }
 }

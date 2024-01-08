@@ -1,5 +1,4 @@
 import {
-  DataSource,
   type EntitySubscriberInterface,
   EventSubscriber,
   type InsertEvent,
@@ -11,14 +10,12 @@ import { User } from './user.entity';
 
 @EventSubscriber()
 export class UserSubscriber implements EntitySubscriberInterface<User> {
-  // constructor(dataSource: DataSource) {
-  //   dataSource.subscribers.push(this);
-  // }
   listenTo(): typeof User {
     return User;
   }
 
   beforeInsert(event: InsertEvent<User>): void {
+    console.log(event);
     if (event.entity.password) {
       event.entity.password = generateHash(event.entity.password);
     }

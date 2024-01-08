@@ -5,17 +5,15 @@ export class CreateUsersTable1704558786419 implements MigrationInterface {
     await queryRunner.query(`
             CREATE TABLE "users"
             (
-        "id"         integer              NOT NULL,
+        "id"         SERIAL               PRIMARY KEY,
         "first_name" character varying,
         "last_name"  character varying,
-        "email"      character varying,
+        "email"      character varying    UNIQUE,
         "password"   character varying,
-        "phone"      character varying,
+        "mobile"     character varying,
+        "is_active"  boolean              DEFAULT true,
         "created_at" TIMESTAMP            NOT NULL DEFAULT now(),
-        "updated_at" TIMESTAMP            NOT NULL DEFAULT now(),
-        CONSTRAINT "UQ_97672ac88f789774dd47f7c8be3" UNIQUE ("email"),
-        CONSTRAINT "PK_a3ffb1c0c8416b9fc6f907b7433" PRIMARY KEY ("id")
-      
+        "updated_at" TIMESTAMP            NOT NULL DEFAULT now()
         )`);
   }
 
