@@ -4,7 +4,6 @@ import {
   PrimaryGeneratedColumn,
   CreateDateColumn,
 } from 'typeorm';
-import postgres from 'postgres';
 
 @Entity({ name: 'users' })
 export class User {

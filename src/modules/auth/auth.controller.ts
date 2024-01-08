@@ -2,6 +2,7 @@ import {
   Body,
   Controller,
   HttpCode,
+  HttpStatus,
   Post,
   Req,
   UseGuards,
@@ -28,8 +29,9 @@ export class AuthController {
   }
   @UseGuards(LocalAuthGuard)
   @Post('login')
-  @HttpCode(200)
+  @HttpCode(HttpStatus.OK)
   async login(@Req() request: Request) {
+    // console.log(request.user);
     return this.authService.createToken(request.user);
   }
 }
