@@ -12,8 +12,8 @@ export default new DataSource({
   database: process.env.DB_NAME,
   subscribers: ['src/modules/**/*.subscriber{.ts,.js}'],
   entities: [
-    'src/modules/**/*.entity{.ts,.js}',
-    'src/modules/**/*.view-entity{.ts,.js}',
+    'src/modules/**/entities/*.entity{.ts,.js}',
+    'src/modules/**/entities/*.view-entity{.ts,.js}',
   ],
   migrations: ['src/database/migrations/*{.ts,.js}'],
 });

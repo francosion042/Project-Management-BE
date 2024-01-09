@@ -12,9 +12,9 @@ import { Request } from 'express';
 import { AuthService } from './auth.service';
 import { LocalAuthGuard } from './local-auth.guard';
 import { NoFilesInterceptor } from '@nestjs/platform-express';
-import { UserRegisterDto } from './dtos/user-register.dto';
+import { UserRegisterDto } from './dto/user-register.dto';
 import { UserService } from '../user/user.service';
-import { BaseResponseDto } from '../../common/dtos/base-response.dto';
+import { BaseResponseDto } from '../../common/dto/base-response.dto';
 
 @Controller('auth')
 export class AuthController {

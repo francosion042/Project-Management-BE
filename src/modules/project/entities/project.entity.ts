@@ -3,30 +3,23 @@ import {
   Column,
   PrimaryGeneratedColumn,
   CreateDateColumn,
+  ManyToOne,
 } from 'typeorm';
+import { User } from '../../user/entities/user.entity';
 
-@Entity({ name: 'users' })
-export class User {
+@Entity({ name: 'projects' })
+export class Project {
   @PrimaryGeneratedColumn()
   id: number;
 
   @Column()
-  email: string;
+  name: string;
+
+  @Column('text')
+  description: string;
 
   @Column()
-  password: string;
-
-  @Column()
-  firstName: string;
-
-  @Column()
-  lastName: string;
-
-  @Column()
-  mobile: string;
-
-  @Column({ default: true })
-  isActive: boolean;
+  status: string;
 
   @CreateDateColumn({
     type: 'timestamptz',
@@ -40,4 +33,7 @@ export class User {
     update: true,
   })
   updatedAt: Date;
+
+  @ManyToOne(() => User, (user) => user.projects)
+  owner: User;
 }

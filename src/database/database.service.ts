@@ -8,8 +8,8 @@ export class DatabaseService {
   constructor(private envConfig: EnvConfigService) {}
   get postgresConfig(): TypeOrmModuleOptions {
     const entities = [
-      __dirname + '/../modules/**/*.entity{.ts,.js}',
-      __dirname + '/../modules/**/*.view-entity{.ts,.js}',
+      __dirname + '/../modules/**/entities/*.entity{.ts,.js}',
+      __dirname + '/../modules/**/entities/*.view-entity{.ts,.js}',
     ];
     const migrations = [__dirname + '/migrations/*{.ts,.js}'];
     const subscribers = [__dirname + '/../modules/**/*.subscriber{.ts,.js}'];
@@ -29,6 +29,7 @@ export class DatabaseService {
       migrationsRun: this.envConfig.isProduction,
       logging: this.envConfig.getBoolean('ENABLE_ORM_LOGS'),
       namingStrategy: new SnakeNamingStrategy(),
+      autoLoadEntities: true,
     };
   }
 }
