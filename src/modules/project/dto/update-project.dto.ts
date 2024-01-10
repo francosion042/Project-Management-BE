@@ -1,15 +1,15 @@
 import { PartialType } from '@nestjs/swagger';
 import { CreateProjectDto } from './create-project.dto';
 import { IsString, IsEnum } from 'class-validator';
-import { Project } from '../entities/project.entity';
+import { ProjectStatus } from '../entities/index.enum';
 
 export class UpdateProjectDto extends PartialType(CreateProjectDto) {
   @IsString()
-  name: string;
+  name?: string;
 
   @IsString()
-  description: string;
+  description?: string;
 
-  @IsEnum(Project)
-  status?: string;
+  @IsEnum(ProjectStatus)
+  status?: ProjectStatus;
 }

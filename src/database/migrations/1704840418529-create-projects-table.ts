@@ -8,7 +8,7 @@ export class CreateProjectsTable1704840418529 implements MigrationInterface {
         "id"            SERIAL               PRIMARY KEY,
         "name"          character varying,
         "description"   character varying,
-        "status"        character varying    UNIQUE,
+        "status"        character varying    DEFAULT 'OPEN',
         "owner_id"      INTEGER REFERENCES "users"("id") ON DELETE CASCADE,
         "created_at"    TIMESTAMP            NOT NULL DEFAULT now(),
         "updated_at"    TIMESTAMP            NOT NULL DEFAULT now()

@@ -3,7 +3,7 @@ import {
   Column,
   PrimaryGeneratedColumn,
   CreateDateColumn,
-  ManyToOne,
+  ManyToOne, JoinColumn,
 } from 'typeorm';
 import { User } from '../../user/entities/user.entity';
 import { ProjectStatus } from './index.enum';
@@ -25,6 +25,7 @@ export class Project {
   @CreateDateColumn({
     type: 'timestamptz',
     default: () => 'CURRENT_TIMESTAMP',
+    update: false,
   })
   createdAt: Date;
 
@@ -36,5 +37,6 @@ export class Project {
   updatedAt: Date;
 
   @ManyToOne(() => User, (user) => user.projects)
+  @JoinColumn()
   owner: User;
 }

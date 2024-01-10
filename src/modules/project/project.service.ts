@@ -29,8 +29,10 @@ export class ProjectService {
     return `This action returns a #${id} project`;
   }
 
-  update(id: number, updateProjectDto: UpdateProjectDto) {
-    return `This action updates a #${id} project`;
+  async update(id: number, updateProjectDto: UpdateProjectDto) {
+    await this.projectRepository.update({ id }, updateProjectDto);
+
+    return await this.projectRepository.findOneOrFail({ where: { id } });
   }
 
   remove(id: number) {
