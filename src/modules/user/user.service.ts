@@ -19,10 +19,16 @@ export class UserService {
   }
 
   findOne(id: number): Promise<User | null> {
-    return this.usersRepository.findOneBy({ id });
+    return this.usersRepository.findOne({
+      where: { id },
+      relations: ['projects'],
+    });
   }
   findOneOrFail(id: number): Promise<User> {
-    return this.usersRepository.findOneByOrFail({ id });
+    return this.usersRepository.findOneOrFail({
+      where: { id },
+      relations: ['projects'],
+    });
   }
 
   findOneByEmail(email: string): Promise<User | null> {

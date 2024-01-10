@@ -6,6 +6,7 @@ import {
   ManyToOne,
 } from 'typeorm';
 import { User } from '../../user/entities/user.entity';
+import { ProjectStatus } from './index.enum';
 
 @Entity({ name: 'projects' })
 export class Project {
@@ -18,7 +19,7 @@ export class Project {
   @Column('text')
   description: string;
 
-  @Column()
+  @Column({ type: 'enum', enum: ProjectStatus, default: ProjectStatus.OPEN })
   status: string;
 
   @CreateDateColumn({

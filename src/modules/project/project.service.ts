@@ -1,11 +1,24 @@
 import { Injectable } from '@nestjs/common';
 import { CreateProjectDto } from './dto/create-project.dto';
 import { UpdateProjectDto } from './dto/update-project.dto';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+import { Project } from './entities/project.entity';
+import { User } from '../user/entities/user.entity';
 
 @Injectable()
 export class ProjectService {
-  create(createProjectDto: CreateProjectDto) {
-    return 'This action adds a new project';
+  constructor(
+    @InjectRepository(Project)
+    private projectRepository: Repository<Project>,
+  ) {}
+  async create(createProjectDto: CreateProjectDto, user: User) {
+    const project = await this.projectRepository.create(createProjectDto);
+
+    project.owner = user;
+    await this.projectRepository.save(project);
+
+    return project;
   }
 
   findAll() {

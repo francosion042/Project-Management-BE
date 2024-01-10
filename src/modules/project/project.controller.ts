@@ -14,6 +14,8 @@ import { CreateProjectDto } from './dto/create-project.dto';
 import { UpdateProjectDto } from './dto/update-project.dto';
 import { Request } from 'express';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
+import { User } from '../user/entities/user.entity';
+import { BaseResponseDto } from '../../common/dto/base-response.dto';
 
 @Controller('projects')
 @UseGuards(JwtAuthGuard)
@@ -21,8 +23,15 @@ export class ProjectController {
   constructor(private readonly projectService: ProjectService) {}
 
   @Post()
-  create(@Req() request: Request, @Body() createProjectDto: CreateProjectDto) {
-    return this.projectService.create(createProjectDto);
+  async create(
+    @Req() request: Request,
+    @Body() createProjectDto: CreateProjectDto,
+  ) {
+    const project = await this.projectService.create(
+      createProjectDto,
+      <User>request.user,
+    );
+    return new BaseResponseDto(201, 'Project Created Successfully', project);
   }
 
   @Get()
