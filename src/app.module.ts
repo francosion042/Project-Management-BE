@@ -10,6 +10,8 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { DatabaseService } from './database/database.service';
 import { ProjectModule } from './modules/project/project.module';
 import { ProjectController } from './modules/project/project.controller';
+import { ProjectCollaborationModule } from './modules/project-collaboration/project-collaboration.module';
+import { ProjectCollaborationController } from './modules/project-collaboration/project-collaboration.controller';
 
 @Module({
   imports: [
@@ -17,6 +19,7 @@ import { ProjectController } from './modules/project/project.controller';
     AuthModule,
     UserModule,
     ProjectModule,
+    ProjectCollaborationModule,
     TypeOrmModule.forRootAsync({
       imports: [DatabaseModule],
       useFactory: (configService: DatabaseService) =>
@@ -24,7 +27,12 @@ import { ProjectController } from './modules/project/project.controller';
       inject: [DatabaseService],
     }),
   ],
-  controllers: [AppController, UserController, ProjectController],
+  controllers: [
+    AppController,
+    UserController,
+    ProjectController,
+    ProjectCollaborationController,
+  ],
   providers: [AppService],
 })
 export class AppModule {}

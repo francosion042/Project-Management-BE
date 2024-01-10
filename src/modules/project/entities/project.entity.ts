@@ -3,10 +3,11 @@ import {
   Column,
   PrimaryGeneratedColumn,
   CreateDateColumn,
-  ManyToOne, JoinColumn,
+  ManyToOne, OneToMany,
 } from 'typeorm';
 import { User } from '../../user/entities/user.entity';
 import { ProjectStatus } from './index.enum';
+import { ProjectCollaboration } from '../../project-collaboration/entities/project-collaboration.entity';
 
 @Entity({ name: 'projects' })
 export class Project {
@@ -37,6 +38,11 @@ export class Project {
   updatedAt: Date;
 
   @ManyToOne(() => User, (user) => user.projects)
-  @JoinColumn()
   owner: User;
+
+  @OneToMany(
+    () => ProjectCollaboration,
+    (projectCollaboration) => projectCollaboration.project,
+  )
+  collaborations: ProjectCollaboration[];
 }

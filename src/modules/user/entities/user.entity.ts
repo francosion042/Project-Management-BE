@@ -6,6 +6,7 @@ import {
   OneToMany,
 } from 'typeorm';
 import { Project } from '../../project/entities/project.entity';
+import { ProjectCollaboration } from '../../project-collaboration/entities/project-collaboration.entity';
 
 @Entity({ name: 'users' })
 export class User {
@@ -45,4 +46,10 @@ export class User {
 
   @OneToMany(() => Project, (project) => project.owner)
   projects: Project[];
+
+  @OneToMany(
+    () => ProjectCollaboration,
+    (projectCollaboration) => projectCollaboration.collaborator,
+  )
+  projectCollaborations: ProjectCollaboration[];
 }
