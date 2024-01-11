@@ -15,6 +15,6 @@ import { MailerService } from '../mailer/mailer.service';
   ],
   controllers: [ProjectCollaborationInviteController],
   providers: [ProjectCollaborationInviteService, MailerService],
-  exports: [TypeOrmModule, ProjectCollaborationInviteService],
+  exports: [ProjectCollaborationInviteService],
 })
 export class ProjectCollaborationInviteModule {}

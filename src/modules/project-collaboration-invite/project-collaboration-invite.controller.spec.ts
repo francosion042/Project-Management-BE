@@ -11,7 +11,9 @@ describe('ProjectCollaborationInviteController', () => {
       providers: [ProjectCollaborationInviteService],
     }).compile();
 
-    controller = module.get<ProjectCollaborationInviteController>(ProjectCollaborationInviteController);
+    controller = module.get<ProjectCollaborationInviteController>(
+      ProjectCollaborationInviteController,
+    );
   });
 
   it('should be defined', () => {

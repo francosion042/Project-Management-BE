@@ -8,7 +8,7 @@ import {
 import { Project } from '../../project/entities/project.entity';
 import { InviteStatus } from './index.enum';
 
-@Entity('project_collaboration_invites')
+@Entity({ name: 'project_collaboration_invites' })
 export class ProjectCollaborationInvite {
   @PrimaryGeneratedColumn()
   id: number;

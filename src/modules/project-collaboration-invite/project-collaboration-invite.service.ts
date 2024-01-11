@@ -6,6 +6,7 @@ import { ProjectCollaborationInvite } from './entities/project-collaboration-inv
 import { Repository } from 'typeorm';
 import { MailerService } from '../mailer/mailer.service';
 import { ProjectService } from '../project/project.service';
+import { BaseResponseDto } from '../../common/dto/base-response.dto';
 
 @Injectable()
 export class ProjectCollaborationInviteService {
@@ -20,10 +21,12 @@ export class ProjectCollaborationInviteService {
     projectId: number,
   ) {
     const project = await this.projectService.findOne(projectId);
-    const invite = this.projectCollaborationInviteRepository.create({
-      ...createProjectCollaborationInviteDto,
-      project,
-    });
+    const invite = this.projectCollaborationInviteRepository.create(
+      createProjectCollaborationInviteDto,
+    );
+
+    invite.project = project;
+    await this.projectCollaborationInviteRepository.save(invite);
 
     await this.mailerService.sendMail(
       invite.email,
@@ -31,7 +34,7 @@ export class ProjectCollaborationInviteService {
       'project-invite',
       { project },
     );
-    return invite;
+    return new BaseResponseDto(201, 'Invite Sent Successfully', invite);
   }
 
   findAll() {

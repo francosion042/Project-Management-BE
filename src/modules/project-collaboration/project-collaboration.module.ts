@@ -8,6 +8,6 @@ import { ProjectCollaboration } from './entities/project-collaboration.entity';
   imports: [TypeOrmModule.forFeature([ProjectCollaboration])],
   controllers: [ProjectCollaborationController],
   providers: [ProjectCollaborationService],
-  exports: [TypeOrmModule, ProjectCollaborationService],
+  exports: [ProjectCollaborationService],
 })
 export class ProjectCollaborationModule {}
