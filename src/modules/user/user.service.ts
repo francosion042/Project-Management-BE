@@ -27,7 +27,11 @@ export class UserService {
   findOneOrFail(id: number): Promise<User> {
     return this.usersRepository.findOneOrFail({
       where: { id },
-      relations: ['projects'],
+      relations: [
+        'projects',
+        'projectCollaborations',
+        'projectCollaborations.project',
+      ],
     });
   }
 
