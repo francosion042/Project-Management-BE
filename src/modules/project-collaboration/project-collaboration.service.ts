@@ -4,6 +4,8 @@ import { UpdateProjectCollaborationDto } from './dto/update-project-collaboratio
 import { InjectRepository } from '@nestjs/typeorm';
 import { ProjectCollaboration } from './entities/project-collaboration.entity';
 import { Repository } from 'typeorm';
+import { Project } from '../project/entities/project.entity';
+import { User } from '../user/entities/user.entity';
 
 @Injectable()
 export class ProjectCollaborationService {
@@ -11,8 +13,18 @@ export class ProjectCollaborationService {
     @InjectRepository(ProjectCollaboration)
     private projectCollaborationRepository: Repository<ProjectCollaboration>,
   ) {}
-  create(createProjectCollaborationDto: CreateProjectCollaborationDto) {
-    return 'This action adds a new projectCollaboration';
+  async create(
+    createProjectCollaborationDto: CreateProjectCollaborationDto,
+    project: Project,
+    user: User,
+  ) {
+    const collaboration = this.projectCollaborationRepository.create(
+      createProjectCollaborationDto,
+    );
+
+    collaboration.collaborator = user;
+    collaboration.project = project;
+    await this.projectCollaborationRepository.save(collaboration);
   }
 
   findAll() {

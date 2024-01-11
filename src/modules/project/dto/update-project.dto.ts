@@ -11,5 +11,5 @@ export class UpdateProjectDto extends PartialType(CreateProjectDto) {
   description?: string;
 
   @IsEnum(ProjectStatus)
-  status?: ProjectStatus;
+  status?: string;
 }

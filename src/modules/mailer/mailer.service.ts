@@ -1,7 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import * as nodemailer from 'nodemailer';
 import { EnvConfigService } from '../../envConfig/envConfig.service';
-import { OnEvent } from '@nestjs/event-emitter';
 import * as handlebars from 'handlebars';
 import * as fs from 'fs';
 

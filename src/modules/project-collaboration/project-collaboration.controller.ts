@@ -1,7 +1,6 @@
 import {
   Controller,
   Get,
-  Post,
   Body,
   Patch,
   Param,
@@ -9,23 +8,26 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { ProjectCollaborationService } from './project-collaboration.service';
-import { CreateProjectCollaborationDto } from './dto/create-project-collaboration.dto';
 import { UpdateProjectCollaborationDto } from './dto/update-project-collaboration.dto';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 
-@Controller('project-collaborations')
+@Controller('projects/:project_id/collaborations')
 @UseGuards(JwtAuthGuard)
 export class ProjectCollaborationController {
   constructor(
     private readonly projectCollaborationService: ProjectCollaborationService,
   ) {}
-
-  @Post()
-  create(@Body() createProjectCollaborationDto: CreateProjectCollaborationDto) {
-    return this.projectCollaborationService.create(
-      createProjectCollaborationDto,
-    );
-  }
+  //
+  // @Post()
+  // create(
+  //   @Param('project_id') projectId: string,
+  //   @Req() request: Request,
+  //   @Body() createProjectCollaborationDto: CreateProjectCollaborationDto,
+  // ) {
+  //   return this.projectCollaborationService.create(
+  //     createProjectCollaborationDto,
+  //   );
+  // }
 
   @Get()
   findAll() {

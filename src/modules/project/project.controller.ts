@@ -45,7 +45,10 @@ export class ProjectController {
   }
 
   @Patch(':id')
-  async update(@Param('id') id: string, @Body() updateProjectDto: UpdateProjectDto) {
+  async update(
+    @Param('id') id: string,
+    @Body() updateProjectDto: UpdateProjectDto,
+  ) {
     const project = await this.projectService.update(+id, updateProjectDto);
     return new BaseResponseDto(200, 'Project Updated Successfully', project);
   }
