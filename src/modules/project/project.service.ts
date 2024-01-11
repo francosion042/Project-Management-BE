@@ -13,7 +13,7 @@ export class ProjectService {
     private projectRepository: Repository<Project>,
   ) {}
   async create(createProjectDto: CreateProjectDto, user: User) {
-    const project = await this.projectRepository.create(createProjectDto);
+    const project = this.projectRepository.create(createProjectDto);
 
     project.owner = user;
     await this.projectRepository.save(project);
@@ -25,12 +25,18 @@ export class ProjectService {
     return `This action returns all project`;
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} project`;
+  async findOne(id: number) {
+    return await this.projectRepository.findOneOrFail({
+      where: { id },
+      relations: ['owner'],
+    });
   }
 
   async update(id: number, updateProjectDto: UpdateProjectDto) {
-    await this.projectRepository.update({ id }, updateProjectDto);
+    await this.projectRepository.update(
+      { id },
+      { ...updateProjectDto, updatedAt: new Date() },
+    );
 
     return await this.projectRepository.findOneOrFail({ where: { id } });
   }

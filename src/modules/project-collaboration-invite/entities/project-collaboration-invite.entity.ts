@@ -13,6 +13,9 @@ export class ProjectCollaborationInvite {
   @PrimaryGeneratedColumn()
   id: number;
 
+  @Column()
+  email: string;
+
   @Column('jsonb')
   permissions: object;
 
@@ -20,6 +23,7 @@ export class ProjectCollaborationInvite {
   status: string;
 
   @CreateDateColumn({
+    name: 'created_at',
     type: 'timestamptz',
     default: () => 'CURRENT_TIMESTAMP',
     update: false,
@@ -27,11 +31,15 @@ export class ProjectCollaborationInvite {
   createdAt: Date;
 
   @CreateDateColumn({
+    name: 'updated_at',
     type: 'timestamptz',
     default: () => 'CURRENT_TIMESTAMP',
     update: true,
   })
   updatedAt: Date;
+
+  @Column({ name: 'project_id' })
+  projectId: number;
 
   @ManyToOne(() => Project, (project) => project.collaborations)
   project: Project;

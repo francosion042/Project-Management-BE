@@ -1,4 +1,6 @@
-import { IsInt, IsObject } from 'class-validator';
+import { IsNotEmpty, IsObject } from 'class-validator';
+import { User } from '../../user/entities/user.entity';
+import { Project } from '../../project/entities/project.entity';
 
 interface PermissionsType {
   create: boolean;
@@ -10,6 +12,9 @@ export class CreateProjectCollaborationDto {
   @IsObject()
   permissions: PermissionsType;
 
-  @IsInt()
-  collaboratorId: number;
+  @IsNotEmpty()
+  collaborator: User;
+
+  @IsNotEmpty()
+  project: Project;
 }

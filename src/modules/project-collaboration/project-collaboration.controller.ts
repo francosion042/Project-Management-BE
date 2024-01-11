@@ -1,15 +1,30 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  UseGuards,
+} from '@nestjs/common';
 import { ProjectCollaborationService } from './project-collaboration.service';
 import { CreateProjectCollaborationDto } from './dto/create-project-collaboration.dto';
 import { UpdateProjectCollaborationDto } from './dto/update-project-collaboration.dto';
+import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 
-@Controller('project-collaboration')
+@Controller('project-collaborations')
+@UseGuards(JwtAuthGuard)
 export class ProjectCollaborationController {
-  constructor(private readonly projectCollaborationService: ProjectCollaborationService) {}
+  constructor(
+    private readonly projectCollaborationService: ProjectCollaborationService,
+  ) {}
 
   @Post()
   create(@Body() createProjectCollaborationDto: CreateProjectCollaborationDto) {
-    return this.projectCollaborationService.create(createProjectCollaborationDto);
+    return this.projectCollaborationService.create(
+      createProjectCollaborationDto,
+    );
   }
 
   @Get()
@@ -23,8 +38,14 @@ export class ProjectCollaborationController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateProjectCollaborationDto: UpdateProjectCollaborationDto) {
-    return this.projectCollaborationService.update(+id, updateProjectCollaborationDto);
+  update(
+    @Param('id') id: string,
+    @Body() updateProjectCollaborationDto: UpdateProjectCollaborationDto,
+  ) {
+    return this.projectCollaborationService.update(
+      +id,
+      updateProjectCollaborationDto,
+    );
   }
 
   @Delete(':id')

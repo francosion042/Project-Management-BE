@@ -17,6 +17,7 @@ export class ProjectCollaboration {
   permissions: object;
 
   @CreateDateColumn({
+    name: 'created_at',
     type: 'timestamptz',
     default: () => 'CURRENT_TIMESTAMP',
     update: false,
@@ -24,14 +25,21 @@ export class ProjectCollaboration {
   createdAt: Date;
 
   @CreateDateColumn({
+    name: 'updated_at',
     type: 'timestamptz',
     default: () => 'CURRENT_TIMESTAMP',
     update: true,
   })
   updatedAt: Date;
 
+  @Column({ name: 'project_id' })
+  projectId: number;
+
   @ManyToOne(() => Project, (project) => project.collaborations)
   project: Project;
+
+  @Column({ name: 'collaborator_id' })
+  collaboratorId: number;
 
   @ManyToOne(() => User, (user) => user.projectCollaborations)
   collaborator: User;

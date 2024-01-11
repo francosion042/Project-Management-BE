@@ -12,6 +12,12 @@ import { ProjectModule } from './modules/project/project.module';
 import { ProjectController } from './modules/project/project.controller';
 import { ProjectCollaborationModule } from './modules/project-collaboration/project-collaboration.module';
 import { ProjectCollaborationController } from './modules/project-collaboration/project-collaboration.controller';
+import { ProjectCollaborationInviteModule } from './modules/project-collaboration-invite/project-collaboration-invite.module';
+import { MailerModule } from './modules/mailer/mailer.module';
+import { EventEmitterModule } from '@nestjs/event-emitter';
+import {
+  ProjectCollaborationInviteController
+} from './modules/project-collaboration-invite/project-collaboration-invite.controller';
 
 @Module({
   imports: [
@@ -20,6 +26,9 @@ import { ProjectCollaborationController } from './modules/project-collaboration/
     UserModule,
     ProjectModule,
     ProjectCollaborationModule,
+    ProjectCollaborationInviteModule,
+    MailerModule,
+    EventEmitterModule.forRoot(),
     TypeOrmModule.forRootAsync({
       imports: [DatabaseModule],
       useFactory: (configService: DatabaseService) =>
@@ -32,6 +41,7 @@ import { ProjectCollaborationController } from './modules/project-collaboration/
     UserController,
     ProjectController,
     ProjectCollaborationController,
+    ProjectCollaborationInviteController,
   ],
   providers: [AppService],
 })
