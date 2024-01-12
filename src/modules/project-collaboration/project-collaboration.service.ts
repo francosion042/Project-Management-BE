@@ -27,8 +27,12 @@ export class ProjectCollaborationService {
     await this.projectCollaborationRepository.save(collaboration);
   }
 
-  findAll() {
-    return `This action returns all projectCollaboration`;
+  // This action returns all projectCollaboration
+  async findAll(projectId: number) {
+    return await this.projectCollaborationRepository.find({
+      where: { projectId },
+      relations: ['collaborator'],
+    });
   }
 
   findOne(id: number) {

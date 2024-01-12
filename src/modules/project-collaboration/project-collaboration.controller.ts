@@ -30,8 +30,8 @@ export class ProjectCollaborationController {
   // }
 
   @Get()
-  findAll() {
-    return this.projectCollaborationService.findAll();
+  findAll(@Param('project_id') projectId: string) {
+    return this.projectCollaborationService.findAll(Number(projectId));
   }
 
   @Get(':id')
