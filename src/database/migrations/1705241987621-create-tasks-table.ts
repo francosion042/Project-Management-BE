@@ -12,9 +12,12 @@ export class CreateTasksTable1705241987621 implements MigrationInterface {
         "status"            CHARACTER VARYING,
         "difficulty"        CHARACTER VARYING,   DEFAULT 'EASY',
         "priority"          CHARACTER VARYING,   DEFAULT 'LOW',
+        "duration"          JSONB
         "project_id"        INTEGER REFERENCES "projects"("id") ON DELETE CASCADE,
         "creator_id"        INTEGER REFERENCES "users"("id") ON DELETE CASCADE,
         "assignee_id"       INTEGER REFERENCES "users"("id") ON DELETE SET NULL,
+        "start_date"        TIMESTAMP,
+        "due_date"          TIMESTAMP,
         "created_at"        TIMESTAMP            NOT NULL DEFAULT now(),
         "updated_at"        TIMESTAMP            NOT NULL DEFAULT now()
         )`);

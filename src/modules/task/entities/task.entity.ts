@@ -29,11 +29,23 @@ export class Task {
   @Column({ type: 'enum', enum: TaskPriority })
   priority: string;
 
-  @Column()
-  duration: string;
+  @Column({ type: 'jsonb' })
+  duration: object;
 
   @Column({ type: 'enum', enum: TaskStatus })
   status: string;
+
+  @CreateDateColumn({
+    name: 'start_date',
+    type: 'timestamptz',
+  })
+  startDate: Date;
+
+  @CreateDateColumn({
+    name: 'due_date',
+    type: 'timestamptz',
+  })
+  dueDate: Date;
 
   @CreateDateColumn({
     name: 'created_at',
