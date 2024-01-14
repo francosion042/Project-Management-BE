@@ -8,7 +8,7 @@ export class CreateProjectCollaborationInvitesTable1704882764638
             CREATE TABLE "project_collaboration_invites"
             (
         "id"                SERIAL               PRIMARY KEY,
-        "email"            CHARACTER VARYING     NOT NULL,
+        "email"             CHARACTER VARYING    NOT NULL,
         "permissions"       JSONB,
         "status"            CHARACTER VARYING    DEFAULT 'PENDING',
         "project_id"        INTEGER REFERENCES "projects"("id") ON DELETE CASCADE,

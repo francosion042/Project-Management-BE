@@ -7,6 +7,7 @@ import {
 } from 'typeorm';
 import { Project } from '../../project/entities/project.entity';
 import { ProjectCollaboration } from '../../project-collaboration/entities/project-collaboration.entity';
+import { Task } from '../../task/entities/task.entity';
 
 @Entity({ name: 'users' })
 export class User {
@@ -52,4 +53,10 @@ export class User {
     (projectCollaboration) => projectCollaboration.collaborator,
   )
   projectCollaborations: ProjectCollaboration[];
+
+  @OneToMany(() => Task, (task) => task.creator)
+  tasksCreated: Task[];
+
+  @OneToMany(() => Task, (task) => task.assignee)
+  tasksAssigned: Task[];
 }

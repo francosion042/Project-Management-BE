@@ -9,6 +9,7 @@ import {
 import { User } from '../../user/entities/user.entity';
 import { ProjectStatus } from './index.enum';
 import { ProjectCollaboration } from '../../project-collaboration/entities/project-collaboration.entity';
+import { Task } from '../../task/entities/task.entity';
 
 @Entity({ name: 'projects' })
 export class Project {
@@ -51,4 +52,7 @@ export class Project {
     (projectCollaboration) => projectCollaboration.project,
   )
   collaborations: ProjectCollaboration[];
+
+  @OneToMany(() => Task, (task) => task.project)
+  tasks: Task[];
 }

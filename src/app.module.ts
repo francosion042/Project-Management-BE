@@ -18,6 +18,7 @@ import { EventEmitterModule } from '@nestjs/event-emitter';
 import {
   ProjectCollaborationInviteController
 } from './modules/project-collaboration-invite/project-collaboration-invite.controller';
+import { TaskModule } from './modules/task/task.module';
 
 @Module({
   imports: [
@@ -28,6 +29,7 @@ import {
     ProjectCollaborationModule,
     ProjectCollaborationInviteModule,
     MailerModule,
+    TaskModule,
     EventEmitterModule.forRoot(),
     TypeOrmModule.forRootAsync({
       imports: [DatabaseModule],
