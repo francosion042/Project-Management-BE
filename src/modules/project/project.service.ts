@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateProjectDto } from './dto/create-project.dto';
 import { UpdateProjectDto } from './dto/update-project.dto';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -26,10 +26,14 @@ export class ProjectService {
   }
 
   async findOne(id: number) {
-    return await this.projectRepository.findOneOrFail({
-      where: { id },
-      relations: ['owner'],
-    });
+    try {
+      return await this.projectRepository.findOneOrFail({
+        where: { id },
+        relations: ['owner'],
+      });
+    } catch (error) {
+      throw new NotFoundException();
+    }
   }
 
   async update(id: number, updateProjectDto: UpdateProjectDto) {

@@ -32,7 +32,7 @@ export class Task {
   @Column({ type: 'jsonb' })
   duration: object;
 
-  @Column({ type: 'enum', enum: TaskStatus })
+  @Column({ type: 'enum', enum: TaskStatus, default: TaskStatus.IN_PROGRESS })
   status: string;
 
   @CreateDateColumn({

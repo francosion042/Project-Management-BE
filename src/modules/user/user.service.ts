@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { User } from './entities/user.entity';
 import { Repository } from 'typeorm';
@@ -24,15 +24,21 @@ export class UserService {
       relations: ['projects'],
     });
   }
-  findOneOrFail(id: number): Promise<User> {
-    return this.usersRepository.findOneOrFail({
-      where: { id },
-      relations: [
-        'projects',
-        'projectCollaborations',
-        'projectCollaborations.project',
-      ],
-    });
+  async findOneOrFail(id: number, loadRelations: boolean = true) {
+    try {
+      return await this.usersRepository.findOneOrFail({
+        where: { id },
+        ...(loadRelations && {
+          relations: [
+            'projects',
+            'projectCollaborations',
+            'projectCollaborations.project',
+          ],
+        }),
+      });
+    } catch (error) {
+      throw new NotFoundException();
+    }
   }
 
   findOneByEmail(email: string): Promise<User | null> {

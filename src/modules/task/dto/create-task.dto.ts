@@ -1,10 +1,13 @@
 import {
   IsDateString,
   IsNotEmpty,
+  IsNotEmptyObject,
   IsNumber,
   IsObject,
+  IsOptional,
   IsString,
 } from 'class-validator';
+import { User } from '../../user/entities/user.entity';
 
 export class CreateTaskDto {
   @IsString()
@@ -12,7 +15,8 @@ export class CreateTaskDto {
   title: string;
 
   @IsString()
-  description: string;
+  @IsOptional()
+  description?: string;
 
   @IsString()
   difficulty: string;
@@ -22,14 +26,25 @@ export class CreateTaskDto {
 
   @IsObject()
   @IsNotEmpty()
+  @IsNotEmptyObject()
   duration: { durationNumber: number; durationType: string };
 
   @IsNumber()
+  @IsOptional()
+  projectId?: number;
+
+  @IsOptional()
+  creator: User;
+
+  @IsNumber()
+  @IsOptional()
   assigneeId?: number;
 
   @IsDateString()
+  @IsOptional()
   startDate?: string;
 
   @IsDateString()
+  @IsOptional()
   dueDate?: string;
 }

@@ -1,4 +1,4 @@
-import { hashSync, compare } from 'bcrypt';
+import { compare, hashSync } from 'bcrypt';
 
 /**
  * generate hash from password or string
@@ -24,4 +24,15 @@ export function validateHash(
   }
 
   return compare(password, hash);
+}
+
+export function getInitials(sentence: string) {
+  // Split the sentence into words
+  const words = sentence.split(' ');
+
+  // Map each word to its initials
+  const initials = words.map((word) => word.charAt(0));
+
+  // Join the initials to form the result
+  return initials.join('');
 }

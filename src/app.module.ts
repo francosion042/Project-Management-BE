@@ -19,6 +19,7 @@ import {
   ProjectCollaborationInviteController
 } from './modules/project-collaboration-invite/project-collaboration-invite.controller';
 import { TaskModule } from './modules/task/task.module';
+import { TaskController } from './modules/task/task.controller';
 
 @Module({
   imports: [
@@ -41,6 +42,7 @@ import { TaskModule } from './modules/task/task.module';
   controllers: [
     AppController,
     UserController,
+    TaskController,
     ProjectController,
     ProjectCollaborationController,
     ProjectCollaborationInviteController,

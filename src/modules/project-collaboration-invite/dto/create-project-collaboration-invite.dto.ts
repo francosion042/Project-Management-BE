@@ -1,4 +1,4 @@
-import { IsEmail, IsNotEmpty, IsObject } from 'class-validator';
+import { IsEmail, IsNotEmpty, IsNotEmptyObject, IsObject } from 'class-validator';
 
 interface PermissionsType {
   create: boolean;
@@ -8,6 +8,7 @@ interface PermissionsType {
 }
 export class CreateProjectCollaborationInviteDto {
   @IsObject()
+  @IsNotEmptyObject()
   permissions: PermissionsType;
 
   @IsNotEmpty()
