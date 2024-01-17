@@ -20,6 +20,7 @@ import { TaskModule } from './modules/task/task.module';
 import { TaskController } from './modules/task/task.controller';
 import { TaskColumnModule } from './modules/task-column/task-column.module';
 import { TaskColumnController } from './modules/task-column/task-column.controller';
+import { ApiIntegrationsModule } from './modules/api-integrations/api-integrations.module';
 
 @Module({
   imports: [
@@ -32,6 +33,7 @@ import { TaskColumnController } from './modules/task-column/task-column.controll
     MailerModule,
     TaskModule,
     TaskColumnModule,
+    ApiIntegrationsModule,
     EventEmitterModule.forRoot(),
     TypeOrmModule.forRootAsync({
       imports: [DatabaseModule],
