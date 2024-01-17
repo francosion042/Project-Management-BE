@@ -1,15 +1,37 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  Req, UseGuards,
+} from '@nestjs/common';
 import { TaskColumnService } from './task-column.service';
 import { CreateTaskColumnDto } from './dto/create-task-column.dto';
 import { UpdateTaskColumnDto } from './dto/update-task-column.dto';
+import { Request } from 'express';
+import { User } from '../user/entities/user.entity';
+import { BaseResponseDto } from '../../common/dto/base-response.dto';
+import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 
-@Controller('task-column')
+@Controller('projects/:project_id/task-columns')
+@UseGuards(JwtAuthGuard)
 export class TaskColumnController {
   constructor(private readonly taskColumnService: TaskColumnService) {}
 
   @Post()
-  create(@Body() createTaskColumnDto: CreateTaskColumnDto) {
-    return this.taskColumnService.create(createTaskColumnDto);
+  async create(
+    @Body() createTaskColumnDto: CreateTaskColumnDto,
+    @Param('project_id') projectId: number,
+    @Req() request: Request,
+  ) {
+    createTaskColumnDto.creator = <User>request.user;
+    createTaskColumnDto.projectId = projectId;
+    const column = await this.taskColumnService.create(createTaskColumnDto);
+
+    return new BaseResponseDto(201, 'Task Column Created Successfully', column);
   }
 
   @Get()
@@ -23,7 +45,10 @@ export class TaskColumnController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateTaskColumnDto: UpdateTaskColumnDto) {
+  update(
+    @Param('id') id: string,
+    @Body() updateTaskColumnDto: UpdateTaskColumnDto,
+  ) {
     return this.taskColumnService.update(+id, updateTaskColumnDto);
   }
 

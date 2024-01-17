@@ -1,11 +1,37 @@
 import { Injectable } from '@nestjs/common';
 import { CreateTaskColumnDto } from './dto/create-task-column.dto';
 import { UpdateTaskColumnDto } from './dto/update-task-column.dto';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+import { TaskColumn } from './entities/task-column.entity';
+import { ProjectService } from '../project/project.service';
+import { UserService } from '../user/user.service';
 
 @Injectable()
 export class TaskColumnService {
-  create(createTaskColumnDto: CreateTaskColumnDto) {
-    return 'This action adds a new taskColumn';
+  constructor(
+    @InjectRepository(TaskColumn)
+    private taskColumnRepository: Repository<TaskColumn>,
+    private readonly projectService: ProjectService,
+    private readonly userService: UserService,
+  ) {}
+  async create(createTaskColumnDto: CreateTaskColumnDto) {
+    const project = await this.projectService.findOne(
+      createTaskColumnDto.projectId!,
+    );
+
+    const column = this.taskColumnRepository.create(createTaskColumnDto);
+
+    column.creator = await this.userService.findOneOrFail(
+      createTaskColumnDto.creator!.id,
+      false,
+    );
+
+    column.project = project;
+
+    await this.taskColumnRepository.save(column);
+
+    return column;
   }
 
   findAll() {

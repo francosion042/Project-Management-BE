@@ -33,6 +33,9 @@ export class CreateTaskDto {
   @IsOptional()
   projectId?: number;
 
+  @IsNumber()
+  taskColumnId: number;
+
   @IsOptional()
   creator: User;
 
