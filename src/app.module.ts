@@ -15,11 +15,11 @@ import { ProjectCollaborationController } from './modules/project-collaboration/
 import { ProjectCollaborationInviteModule } from './modules/project-collaboration-invite/project-collaboration-invite.module';
 import { MailerModule } from './modules/mailer/mailer.module';
 import { EventEmitterModule } from '@nestjs/event-emitter';
-import {
-  ProjectCollaborationInviteController
-} from './modules/project-collaboration-invite/project-collaboration-invite.controller';
+import { ProjectCollaborationInviteController } from './modules/project-collaboration-invite/project-collaboration-invite.controller';
 import { TaskModule } from './modules/task/task.module';
 import { TaskController } from './modules/task/task.controller';
+import { TaskColumnModule } from './modules/task-column/task-column.module';
+import { TaskColumnController } from './modules/task-column/task-column.controller';
 
 @Module({
   imports: [
@@ -31,6 +31,7 @@ import { TaskController } from './modules/task/task.controller';
     ProjectCollaborationInviteModule,
     MailerModule,
     TaskModule,
+    TaskColumnModule,
     EventEmitterModule.forRoot(),
     TypeOrmModule.forRootAsync({
       imports: [DatabaseModule],
@@ -44,6 +45,7 @@ import { TaskController } from './modules/task/task.controller';
     UserController,
     TaskController,
     ProjectController,
+    TaskColumnController,
     ProjectCollaborationController,
     ProjectCollaborationInviteController,
   ],

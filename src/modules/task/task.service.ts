@@ -36,6 +36,10 @@ export class TaskService {
     return `This action returns all task`;
   }
 
+  async findAllByProjectId(projectId: number) {
+    return await this.taskRepository.findBy({ projectId });
+  }
+
   findOne(id: number) {
     return `This action returns a #${id} task`;
   }

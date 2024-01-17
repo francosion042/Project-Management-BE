@@ -8,6 +8,7 @@ import {
 import { Project } from '../../project/entities/project.entity';
 import { ProjectCollaboration } from '../../project-collaboration/entities/project-collaboration.entity';
 import { Task } from '../../task/entities/task.entity';
+import { TaskColumn } from '../../task-column/entities/task-column.entity';
 
 @Entity({ name: 'users' })
 export class User {
@@ -53,6 +54,9 @@ export class User {
     (projectCollaboration) => projectCollaboration.collaborator,
   )
   projectCollaborations: ProjectCollaboration[];
+
+  @OneToMany(() => TaskColumn, (taskColumn) => taskColumn.creator)
+  taskColumnsCreated: TaskColumn[];
 
   @OneToMany(() => Task, (task) => task.creator)
   tasksCreated: Task[];

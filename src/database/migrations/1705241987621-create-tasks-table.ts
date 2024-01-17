@@ -14,6 +14,7 @@ export class CreateTasksTable1705241987621 implements MigrationInterface {
         "priority"          CHARACTER VARYING    DEFAULT 'LOW',
         "duration"          JSONB,
         "project_id"        INTEGER REFERENCES "projects"("id") ON DELETE CASCADE,
+        "task_column_id"    INTEGER REFERENCES "task_columns"("id") ON DELETE CASCADE,
         "creator_id"        INTEGER REFERENCES "users"("id") ON DELETE CASCADE,
         "assignee_id"       INTEGER REFERENCES "users"("id") ON DELETE SET NULL,
         "start_date"        TIMESTAMP,

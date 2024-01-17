@@ -10,6 +10,7 @@ import { User } from '../../user/entities/user.entity';
 import { ProjectStatus } from './index.enum';
 import { ProjectCollaboration } from '../../project-collaboration/entities/project-collaboration.entity';
 import { Task } from '../../task/entities/task.entity';
+import { TaskColumn } from '../../task-column/entities/task-column.entity';
 
 @Entity({ name: 'projects' })
 export class Project {
@@ -24,6 +25,9 @@ export class Project {
 
   @Column({ type: 'enum', enum: ProjectStatus, default: ProjectStatus.OPEN })
   status: string;
+
+  @Column({ type: 'jsonb', name: 'task_column_order_ids' })
+  taskColumnOrderIds: [];
 
   @CreateDateColumn({
     name: 'created_at',
@@ -55,4 +59,7 @@ export class Project {
 
   @OneToMany(() => Task, (task) => task.project)
   tasks: Task[];
+
+  @OneToMany(() => TaskColumn, (taskColumn) => taskColumn.project)
+  taskColumns: TaskColumn[];
 }

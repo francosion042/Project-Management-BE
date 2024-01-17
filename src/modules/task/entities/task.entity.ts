@@ -8,6 +8,7 @@ import {
 import { Project } from '../../project/entities/project.entity';
 import { User } from '../../user/entities/user.entity';
 import { TaskDifficulty, TaskPriority, TaskStatus } from './index.enum';
+import { TaskColumn } from '../../task-column/entities/task-column.entity';
 
 @Entity('tasks')
 export class Task {
@@ -68,6 +69,12 @@ export class Task {
 
   @ManyToOne(() => Project, (project) => project.tasks)
   project: Project;
+
+  @Column({ name: 'task_column_id' })
+  taskColumnId: number;
+
+  @ManyToOne(() => TaskColumn, (taskColumn) => taskColumn.tasks)
+  taskColumn: TaskColumn;
 
   @Column({ name: 'creator_id' })
   creatorId: number;
