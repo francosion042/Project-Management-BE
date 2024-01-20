@@ -52,7 +52,6 @@ export class ProjectController {
     const project = await this.projectService.update(+id, updateProjectDto);
     return new BaseResponseDto(200, 'Project Updated Successfully', project);
   }
-
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.projectService.remove(+id);

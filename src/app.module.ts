@@ -21,6 +21,8 @@ import { TaskController } from './modules/task/task.controller';
 import { TaskColumnModule } from './modules/task-column/task-column.module';
 import { TaskColumnController } from './modules/task-column/task-column.controller';
 import { ApiIntegrationsModule } from './modules/api-integrations/api-integrations.module';
+import { ArtificialIntelligenceModule } from './modules/artificial-intelligence/artificial-intelligence.module';
+import { ArtificialIntelligenceController } from './modules/artificial-intelligence/artificial-intelligence.controller';
 
 @Module({
   imports: [
@@ -34,6 +36,7 @@ import { ApiIntegrationsModule } from './modules/api-integrations/api-integratio
     TaskModule,
     TaskColumnModule,
     ApiIntegrationsModule,
+    ArtificialIntelligenceModule,
     EventEmitterModule.forRoot(),
     TypeOrmModule.forRootAsync({
       imports: [DatabaseModule],
@@ -50,6 +53,7 @@ import { ApiIntegrationsModule } from './modules/api-integrations/api-integratio
     TaskColumnController,
     ProjectCollaborationController,
     ProjectCollaborationInviteController,
+    ArtificialIntelligenceController,
   ],
   providers: [AppService],
 })

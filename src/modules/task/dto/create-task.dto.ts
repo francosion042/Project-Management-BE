@@ -1,5 +1,5 @@
 import {
-  IsDateString,
+  IsDateString, IsEnum,
   IsNotEmpty,
   IsNotEmptyObject,
   IsNumber,
@@ -8,6 +8,7 @@ import {
   IsString,
 } from 'class-validator';
 import { User } from '../../user/entities/user.entity';
+import { TaskDifficulty, TaskPriority } from '../entities/index.enum';
 
 export class CreateTaskDto {
   @IsString()
@@ -18,10 +19,10 @@ export class CreateTaskDto {
   @IsOptional()
   description?: string;
 
-  @IsString()
+  @IsEnum(TaskDifficulty)
   difficulty: string;
 
-  @IsString()
+  @IsEnum(TaskPriority)
   priority: string;
 
   @IsObject()

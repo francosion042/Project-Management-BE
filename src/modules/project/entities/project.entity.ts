@@ -7,7 +7,7 @@ import {
   OneToMany,
 } from 'typeorm';
 import { User } from '../../user/entities/user.entity';
-import { ProjectStatus } from './index.enum';
+import { ProjectCategory, ProjectStatus } from './index.enum';
 import { ProjectCollaboration } from '../../project-collaboration/entities/project-collaboration.entity';
 import { Task } from '../../task/entities/task.entity';
 import { TaskColumn } from '../../task-column/entities/task-column.entity';
@@ -22,6 +22,9 @@ export class Project {
 
   @Column('text')
   description: string;
+
+  @Column({ type: 'enum', enum: ProjectCategory })
+  category: string;
 
   @Column({ type: 'enum', enum: ProjectStatus, default: ProjectStatus.OPEN })
   status: string;

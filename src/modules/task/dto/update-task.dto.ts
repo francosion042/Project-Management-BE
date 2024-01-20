@@ -1,7 +1,7 @@
 import { PartialType } from '@nestjs/swagger';
 import { CreateTaskDto } from './create-task.dto';
 import {
-  IsDateString,
+  IsDateString, IsEnum,
   IsNotEmpty,
   IsNotEmptyObject,
   IsNumber,
@@ -9,6 +9,7 @@ import {
   IsOptional,
   IsString,
 } from 'class-validator';
+import { TaskDifficulty, TaskPriority } from '../entities/index.enum';
 
 export class UpdateTaskDto extends PartialType(CreateTaskDto) {
   @IsString()
@@ -20,13 +21,13 @@ export class UpdateTaskDto extends PartialType(CreateTaskDto) {
   @IsOptional()
   description?: string;
 
-  @IsString()
+  @IsEnum(TaskDifficulty)
   @IsOptional()
-  difficulty: string;
+  difficulty?: string;
 
-  @IsString()
+  @IsEnum(TaskPriority)
   @IsOptional()
-  priority: string;
+  priority?: string;
 
   @IsObject()
   @IsNotEmpty()

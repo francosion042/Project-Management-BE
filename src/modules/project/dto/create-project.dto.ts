@@ -1,4 +1,5 @@
-import { IsString, IsNotEmpty } from 'class-validator';
+import { IsString, IsNotEmpty, IsEnum } from 'class-validator';
+import { ProjectCategory } from '../entities/index.enum';
 export class CreateProjectDto {
   @IsString()
   @IsNotEmpty()
@@ -7,4 +8,7 @@ export class CreateProjectDto {
   @IsString()
   @IsNotEmpty()
   description: string;
+
+  @IsEnum(ProjectCategory)
+  category: string;
 }

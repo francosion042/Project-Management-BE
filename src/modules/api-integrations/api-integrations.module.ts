@@ -6,5 +6,6 @@ import { EnvConfigModule } from '../../envConfig/envConfig.module';
 @Module({
   imports: [HttpModule, EnvConfigModule],
   providers: [OpenAiService],
+  exports: [OpenAiService],
 })
 export class ApiIntegrationsModule {}
