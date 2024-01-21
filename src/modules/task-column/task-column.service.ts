@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateTaskColumnDto } from './dto/create-task-column.dto';
 import { UpdateTaskColumnDto } from './dto/update-task-column.dto';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -39,7 +39,21 @@ export class TaskColumnService {
   }
 
   findOne(id: number) {
-    return `This action returns a #${id} taskColumn`;
+    return this.taskColumnRepository.findOne({
+      where: { id },
+      relations: ['project'],
+    });
+  }
+
+  findOneOrFail(id: number) {
+    try {
+      return this.taskColumnRepository.findOneOrFail({
+        where: { id },
+        relations: ['project', 'project.owner'],
+      });
+    } catch (error) {
+      throw new NotFoundException(error);
+    }
   }
 
   update(id: number, updateTaskColumnDto: UpdateTaskColumnDto) {

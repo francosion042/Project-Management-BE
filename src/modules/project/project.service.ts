@@ -32,7 +32,7 @@ export class ProjectService {
         relations: ['owner'],
       });
     } catch (error) {
-      throw new NotFoundException();
+      throw new NotFoundException(error);
     }
   }
 

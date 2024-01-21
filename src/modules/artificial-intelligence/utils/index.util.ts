@@ -10,7 +10,7 @@ function startsWithNumberOrHyphen(str: string): boolean {
   return /^[\d-]/.test(str);
 }
 
-export function extractTasks(response: string): CategoryTasks {
+export function extractColumnsAndTasks(response: string): CategoryTasks {
   const tasks: CategoryTasks = {};
   let currentCategory: string = '';
 
@@ -26,6 +26,23 @@ export function extractTasks(response: string): CategoryTasks {
     }
     if (startsWithNumberOrHyphen(line)) {
       tasks[currentCategory].push({
+        title: line.split(':')[0].substring(2).trim(),
+        description: line.split(':')[1].trim(),
+      });
+    }
+  }
+
+  return tasks;
+}
+
+export function extractTasks(response: string): Task[] {
+  const tasks: Task[] = [];
+
+  const lines = response.split('\n');
+
+  for (const line of lines) {
+    if (startsWithNumberOrHyphen(line)) {
+      tasks.push({
         title: line.split(':')[0].substring(2).trim(),
         description: line.split(':')[1].trim(),
       });

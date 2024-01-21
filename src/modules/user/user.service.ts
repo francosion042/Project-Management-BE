@@ -37,7 +37,7 @@ export class UserService {
         }),
       });
     } catch (error) {
-      throw new NotFoundException();
+      throw new NotFoundException(error);
     }
   }
 
