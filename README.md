@@ -1,73 +1,53 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
+# Project Management AI
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+Welcome to Project Management AI, your advanced project and task management companion powered by artificial intelligence.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+## Overview
 
-## Description
+Project Management AI is a state-of-the-art backend application designed to redefine how you approach project management. 
+By leveraging cutting-edge AI capabilities, this tool assists users in generating properly defined tasks and procedures 
+tailored to their unique projects.
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+## Key Features
 
-## Installation
+- **AI-Powered Task Generation:** Benefit from intelligent task suggestions customized to fit your specific project requirements.
+- **Versatile Project Management:** Suitable for various domains, including software development, construction, marketing, research, and more.
+- **Efficient Collaboration:** Streamline collaboration within your team through intuitive task management features.
+- **Task and Project Customization:** Tailor tasks and projects to meet your unique needs, ensuring flexibility and adaptability.
 
-```bash
-$ npm install
-```
+## Getting Started
 
-## Running the app
+1. **Installation:**
+   - Clone this repository.
+   - Install dependencies using `npm install`.
 
-```bash
-# development
-$ npm run start
+2. **Configuration:**
+   - Set up your environment variables in the `.env` file.
 
-# watch mode
-$ npm run start:dev
+3. **Run the Application:**
+   - Execute `npm start` to launch the application.
 
-# production mode
-$ npm run start:prod
-```
+4. **Explore and Enjoy:**
+   - Navigate to [http://localhost:3000](http://localhost:3000) to start using Project Management AI.
 
-## Test
+## API DOCS
+- Check out the API documentation and sample requests/responses 
+[Postman Docs](https://documenter.getpostman.com/view/7759986/2s9YsT79Ga)
 
-```bash
-# unit tests
-$ npm run test
+## Usage
 
-# e2e tests
-$ npm run test:e2e
+1. **Task Generation:**
+   - Leverage AI assistance to generate tasks specific to your project.
 
-# test coverage
-$ npm run test:cov
-```
+2. **Project Management:**
+   - Effectively manage and organize your projects with the intuitive interface.
 
-## Support
+3. **Collaboration:**
+   - Enhance teamwork by streamlining communication and task assignment.
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+## Support and Feedback
 
-## Stay in touch
+For any questions, issues, or feedback, please contact me at [anthonynwobodo7@gmail.com]
+(mailto:anthonynwobodo7@gmail.com).
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](LICENSE).
+Thank you for choosing Project Management AI to elevate your project management experience!

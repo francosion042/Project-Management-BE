@@ -16,13 +16,11 @@ export class ArtificialIntelligenceService {
 
   async generateColumnsAndTasks(id: number) {
     const project = await this.projectService.findOne(id);
-    const projectName = project.name;
-    const projectDescription = project.description;
 
     const prompt =
-      `Generate software development tasks and their descriptions for a project with the following details:\n\n` +
-      `Project Name: ${projectName}\n` +
-      `Project Description: ${projectDescription}\n\n` +
+      `Generate ${project.category} tasks and their descriptions for a project with the following details:\n\n` +
+      `Project Name: ${project.name}\n` +
+      `Project Description: ${project.description}\n\n` +
       `Categories:\n[AI will determine the number of categories and number them and list them with their titles]\n\n` +
       `Tasks:\n[AI will determine the number of tasks and their description per category for each category and list them under each category using only bullet points and it must be in this format title:description]`;
 
