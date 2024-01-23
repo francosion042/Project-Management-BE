@@ -1,6 +1,10 @@
 import { Injectable } from '@nestjs/common';
 import { OpenAiService } from '../api-integrations/openAi.service';
-import { extractColumnsAndTasks, extractTasks } from './utils/index.util';
+import {
+  extractColumnsAndTasks,
+  extractTaskDescription,
+  extractTasks,
+} from './utils/index.util';
 import { ProjectService } from '../project/project.service';
 import { TaskColumnService } from '../task-column/task-column.service';
 import { TaskService } from '../task/task.service';
@@ -22,7 +26,8 @@ export class ArtificialIntelligenceService {
       `Project Name: ${project.name}\n` +
       `Project Description: ${project.description}\n\n` +
       `Categories:\n[AI will determine the number of categories and number them and list them with their titles]\n\n` +
-      `Tasks:\n[AI will determine the number of tasks and their description per category for each category and list them under each category using only bullet points and it must be in this format title:description]`;
+      `Tasks:\n[AI will determine the number of tasks and their description per category for each category and list them 
+      under each category using only bullet points and it must be in this format title:description]`;
 
     const generatedResponse = await this.openAiService.generateResponse({
       prompt,
@@ -65,7 +70,7 @@ export class ArtificialIntelligenceService {
       `for a project with the following details:\n\n` +
       `Project Name: ${column.project.name}\n` +
       `Project Description: ${column.project.description}\n\n` +
-      `Tasks:\n[AI will determine the number of tasks and their description using only bullet points and it must be in this format title:description]`;
+      `Tasks:\n[tasks and their description using only bullet points and it must be in this format title:description]`;
 
     const generatedResponse = await this.openAiService.generateResponse({
       prompt,
@@ -89,5 +94,27 @@ export class ArtificialIntelligenceService {
     }
 
     return column;
+  }
+
+  async generateTaskDescription(taskId: number) {
+    const task = await this.taskService.findOneOrFail(taskId);
+
+    const prompt =
+      `Generate ${task.project.category} task description for the task with the following title: ${task.title} \n\n` +
+      `in the Task Column with the following details:\n\n` +
+      `Task Column Name: ${task.taskColumn.name}\n` +
+      `for a project with the following details:\n\n` +
+      `Project Name: ${task.project.name}\n` +
+      `Project Description: ${task.project.description}\n\n` +
+      `response should be only the description and other details, don't include the task title`;
+
+    const generatedResponse = await this.openAiService.generateResponse({
+      prompt,
+    });
+    console.log(generatedResponse);
+
+    await this.taskService.update(taskId, { description: generatedResponse.replace('\n', '') });
+
+    return await this.taskService.findOneOrFail(taskId);
   }
 }

@@ -51,3 +51,18 @@ export function extractTasks(response: string): Task[] {
 
   return tasks;
 }
+
+export function extractTaskDescription(response: string): string {
+  const lines = response.split('\n');
+
+  for (const line of lines) {
+    if (
+      line.startsWith('Task Description:') ||
+      line.startsWith('Description:')
+    ) {
+      return line.split(':')[1].trim();
+    }
+  }
+
+  return '';
+}

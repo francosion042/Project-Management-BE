@@ -1,4 +1,4 @@
-import { Controller, Param, Post, UseGuards } from '@nestjs/common';
+import { Controller, HttpCode, HttpStatus, Param, Post, UseGuards } from '@nestjs/common';
 import { ArtificialIntelligenceService } from './artificial-intelligence.service';
 import { BaseResponseDto } from '../../common/dto/base-response.dto';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
@@ -32,8 +32,23 @@ export class ArtificialIntelligenceController {
 
     return new BaseResponseDto(
       201,
-      'AI Has Created Possible Tasks For THe Column Successfully',
+      'AI Has Created Possible Tasks For The Column Successfully',
       column,
+    );
+  }
+
+  @Post('tasks/:task_id/generate-task-description')
+  @HttpCode(HttpStatus.OK)
+  async generateTaskDescription(@Param('task_id') taskId: string) {
+    const task =
+      await this.artificialIntelligenceService.generateTaskDescription(
+        Number(taskId),
+      );
+
+    return new BaseResponseDto(
+      200,
+      'AI Has Created Possible Description For The Task Successfully',
+      task,
     );
   }
 }

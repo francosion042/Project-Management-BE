@@ -7,7 +7,7 @@ export class CreateProjectsTable1704840418529 implements MigrationInterface {
             (
         "id"            SERIAL               PRIMARY KEY,
         "name"          character varying,
-        "description"   character varying,
+        "description"   TEXT,
         "category"      character varying    NOT NULL,
         "status"        character varying    DEFAULT 'OPEN',
         "task_column_order_ids" JSONB        DEFAULT '[]'::jsonb,

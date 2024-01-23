@@ -8,7 +8,7 @@ export class CreateTasksTable1705241987621 implements MigrationInterface {
         "id"                SERIAL               PRIMARY KEY,
         "label"             CHARACTER VARYING    NOT NULL,
         "title"             CHARACTER VARYING    NOT NULL,
-        "description"       CHARACTER VARYING,
+        "description"       TEXT,
         "status"            CHARACTER VARYING    DEFAULT 'IN PROGRESS',
         "difficulty"        CHARACTER VARYING    DEFAULT 'EASY',
         "priority"          CHARACTER VARYING    DEFAULT 'LOW',

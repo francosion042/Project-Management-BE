@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateTaskDto } from './dto/create-task.dto';
 import { UpdateTaskDto } from './dto/update-task.dto';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -40,12 +40,23 @@ export class TaskService {
     return await this.taskRepository.findBy({ projectId });
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} task`;
+  async findOne(id: number) {
+    return await this.taskRepository.findBy({ id });
   }
 
-  update(id: number, updateTaskDto: UpdateTaskDto) {
-    return `This action updates a #${id} task`;
+  async findOneOrFail(id: number) {
+    try {
+      return await this.taskRepository.findOneOrFail({
+        where: { id },
+        relations: ['taskColumn', 'project'],
+      });
+    } catch (error) {
+      throw new NotFoundException(error);
+    }
+  }
+
+  async update(id: number, updateTaskDto: UpdateTaskDto) {
+    return await this.taskRepository.update(id, updateTaskDto);
   }
 
   remove(id: number) {

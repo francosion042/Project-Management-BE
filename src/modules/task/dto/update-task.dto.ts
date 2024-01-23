@@ -1,7 +1,8 @@
 import { PartialType } from '@nestjs/swagger';
 import { CreateTaskDto } from './create-task.dto';
 import {
-  IsDateString, IsEnum,
+  IsDateString,
+  IsEnum,
   IsNotEmpty,
   IsNotEmptyObject,
   IsNumber,
@@ -15,7 +16,7 @@ export class UpdateTaskDto extends PartialType(CreateTaskDto) {
   @IsString()
   @IsNotEmpty()
   @IsOptional()
-  title: string;
+  title?: string;
 
   @IsString()
   @IsOptional()
@@ -33,11 +34,7 @@ export class UpdateTaskDto extends PartialType(CreateTaskDto) {
   @IsNotEmpty()
   @IsNotEmptyObject()
   @IsOptional()
-  duration: { durationNumber: number; durationType: string };
-
-  @IsNumber()
-  @IsOptional()
-  projectId?: number;
+  duration?: { durationNumber: number; durationType: string };
 
   @IsNumber()
   @IsOptional()
