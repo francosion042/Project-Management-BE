@@ -23,6 +23,7 @@ import { TaskColumnController } from './modules/task-column/task-column.controll
 import { ApiIntegrationsModule } from './modules/api-integrations/api-integrations.module';
 import { ArtificialIntelligenceModule } from './modules/artificial-intelligence/artificial-intelligence.module';
 import { ArtificialIntelligenceController } from './modules/artificial-intelligence/artificial-intelligence.controller';
+import { SubTaskModule } from './modules/sub-task/sub-task.module';
 
 @Module({
   imports: [
@@ -34,6 +35,7 @@ import { ArtificialIntelligenceController } from './modules/artificial-intellige
     ProjectCollaborationInviteModule,
     MailerModule,
     TaskModule,
+    SubTaskModule,
     TaskColumnModule,
     ApiIntegrationsModule,
     ArtificialIntelligenceModule,
