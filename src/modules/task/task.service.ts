@@ -22,12 +22,6 @@ export class TaskService {
     task.project = project;
     task.creator = createTaskDto.creator;
 
-    if (createTaskDto.assigneeId) {
-      task.assignee = await this.userService.findOneOrFail(
-        createTaskDto.assigneeId,
-        false,
-      );
-    }
     await this.taskRepository.save(task);
     return task;
   }
@@ -56,7 +50,12 @@ export class TaskService {
   }
 
   async update(id: number, updateTaskDto: UpdateTaskDto) {
-    return await this.taskRepository.update(id, updateTaskDto);
+    await this.taskRepository.update(id, updateTaskDto);
+
+    return await this.taskRepository.findOne({
+      where: { id },
+      relations: ['taskColumn', 'creator', 'assignee'],
+    });
   }
 
   remove(id: number) {

@@ -1,10 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { OpenAiService } from '../api-integrations/openAi.service';
-import {
-  extractColumnsAndTasks,
-  extractTaskDescription,
-  extractTasks,
-} from './utils/index.util';
+import { extractColumnsAndTasks, extractTasks } from './utils/index.util';
 import { ProjectService } from '../project/project.service';
 import { TaskColumnService } from '../task-column/task-column.service';
 import { TaskService } from '../task/task.service';
@@ -113,7 +109,9 @@ export class ArtificialIntelligenceService {
     });
     console.log(generatedResponse);
 
-    await this.taskService.update(taskId, { description: generatedResponse.replace('\n', '') });
+    await this.taskService.update(taskId, {
+      description: generatedResponse.replace('\n', ''),
+    });
 
     return await this.taskService.findOneOrFail(taskId);
   }

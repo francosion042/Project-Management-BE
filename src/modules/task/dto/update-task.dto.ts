@@ -47,4 +47,8 @@ export class UpdateTaskDto extends PartialType(CreateTaskDto) {
   @IsDateString()
   @IsOptional()
   dueDate?: string;
+
+  @IsNumber()
+  @IsOptional()
+  taskColumnId?: number;
 }
