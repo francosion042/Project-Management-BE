@@ -15,11 +15,7 @@ export class TaskService {
     private readonly userService: UserService,
   ) {}
   async create(createTaskDto: CreateTaskDto) {
-    const project = await this.projectService.findOne(createTaskDto.projectId!);
-
     const task = this.taskRepository.create(createTaskDto);
-
-    task.project = project;
     task.creator = createTaskDto.creator;
 
     await this.taskRepository.save(task);
