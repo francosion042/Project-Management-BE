@@ -1,11 +1,17 @@
 import { Injectable } from '@nestjs/common';
 import { CreateSubTaskDto } from './dto/create-sub-task.dto';
 import { UpdateSubTaskDto } from './dto/update-sub-task.dto';
+import { InjectRepository } from '@nestjs/typeorm';
+import { SubTask } from './entities/sub-task.entity';
+import { Repository } from 'typeorm';
 
 @Injectable()
 export class SubTaskService {
-  create(createSubTaskDto: CreateSubTaskDto) {
-    return 'This action adds a new subTask';
+  constructor(
+    @InjectRepository(SubTask) private subTaskRepository: Repository<SubTask>,
+  ) {}
+  async create(createSubTaskDto: CreateSubTaskDto) {
+    return await this.subTaskRepository.save(createSubTaskDto);
   }
 
   findAll() {

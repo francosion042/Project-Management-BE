@@ -1,15 +1,32 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete, UseGuards,
+} from '@nestjs/common';
 import { SubTaskService } from './sub-task.service';
 import { CreateSubTaskDto } from './dto/create-sub-task.dto';
 import { UpdateSubTaskDto } from './dto/update-sub-task.dto';
+import { BaseResponseDto } from '../../common/dto/base-response.dto';
+import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 
-@Controller('sub-task')
+@Controller('tasks/:task_id/sub-tasks')
+@UseGuards(JwtAuthGuard)
 export class SubTaskController {
   constructor(private readonly subTaskService: SubTaskService) {}
 
   @Post()
-  create(@Body() createSubTaskDto: CreateSubTaskDto) {
-    return this.subTaskService.create(createSubTaskDto);
+  async create(
+    @Body() createSubTaskDto: CreateSubTaskDto,
+    @Param('task_id') taskId: number,
+  ) {
+    createSubTaskDto.taskId = taskId;
+    const subTask = await this.subTaskService.create(createSubTaskDto);
+
+    return new BaseResponseDto(201, 'Sub-Task Created Successfully', subTask);
   }
 
   @Get()

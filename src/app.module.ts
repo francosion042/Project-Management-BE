@@ -24,6 +24,7 @@ import { ApiIntegrationsModule } from './modules/api-integrations/api-integratio
 import { ArtificialIntelligenceModule } from './modules/artificial-intelligence/artificial-intelligence.module';
 import { ArtificialIntelligenceController } from './modules/artificial-intelligence/artificial-intelligence.controller';
 import { SubTaskModule } from './modules/sub-task/sub-task.module';
+import { SubTaskController } from './modules/sub-task/sub-task.controller';
 
 @Module({
   imports: [
@@ -52,6 +53,7 @@ import { SubTaskModule } from './modules/sub-task/sub-task.module';
     UserController,
     TaskController,
     ProjectController,
+    SubTaskController,
     TaskColumnController,
     ProjectCollaborationController,
     ProjectCollaborationInviteController,
