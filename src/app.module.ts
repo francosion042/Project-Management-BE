@@ -23,8 +23,8 @@ import { TaskColumnController } from './modules/task-column/task-column.controll
 import { ApiIntegrationsModule } from './modules/api-integrations/api-integrations.module';
 import { ArtificialIntelligenceModule } from './modules/artificial-intelligence/artificial-intelligence.module';
 import { ArtificialIntelligenceController } from './modules/artificial-intelligence/artificial-intelligence.controller';
-import { SubTaskModule } from './modules/sub-task/sub-task.module';
-import { SubTaskController } from './modules/sub-task/sub-task.controller';
+import { TaskRequirementModule } from './modules/task-requirement/task-requirement.module';
+import { TaskRequirementController } from './modules/task-requirement/task-requirement.controller';
 
 @Module({
   imports: [
@@ -36,7 +36,7 @@ import { SubTaskController } from './modules/sub-task/sub-task.controller';
     ProjectCollaborationInviteModule,
     MailerModule,
     TaskModule,
-    SubTaskModule,
+    TaskRequirementModule,
     TaskColumnModule,
     ApiIntegrationsModule,
     ArtificialIntelligenceModule,
@@ -53,8 +53,8 @@ import { SubTaskController } from './modules/sub-task/sub-task.controller';
     UserController,
     TaskController,
     ProjectController,
-    SubTaskController,
     TaskColumnController,
+    TaskRequirementController,
     ProjectCollaborationController,
     ProjectCollaborationInviteController,
     ArtificialIntelligenceController,

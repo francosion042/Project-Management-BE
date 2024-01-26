@@ -66,7 +66,7 @@ export class ArtificialIntelligenceService {
       `for a project with the following details:\n\n` +
       `Project Name: ${column.project.name}\n` +
       `Project Description: ${column.project.description}\n\n` +
-      `Tasks:\n[tasks and their description using only bullet points and it must be in this format title:description]`;
+      `Tasks:\n[tasks and their description, using only bullet points and it must be in this format title:description]`;
 
     const generatedResponse = await this.openAiService.generateResponse({
       prompt,
@@ -112,6 +112,28 @@ export class ArtificialIntelligenceService {
     await this.taskService.update(taskId, {
       description: generatedResponse.replace('\n', ''),
     });
+
+    return await this.taskService.findOneOrFail(taskId);
+  }
+
+  async generateTaskRequirements(taskId: number) {
+    const task = await this.taskService.findOneOrFail(taskId);
+
+    const prompt =
+      `Generate ${task.project.category} task requirements and description for the task with the following: \n\n` +
+      `Task Title: ${task.title} \n\n` +
+      `Task Description: ${task.description} \n\n` +
+      `in the Task Column with the following details:\n\n` +
+      `Task Column Name: ${task.taskColumn.name}\n` +
+      `for a project with the following details:\n\n` +
+      `Project Name: ${task.project.name}\n` +
+      `Project Description: ${task.project.description}\n\n` +
+      `Task Requirements:\n[task requirements and their description, using only bullet points]`;
+
+    const generatedResponse = await this.openAiService.generateResponse({
+      prompt,
+    });
+    console.log(generatedResponse);
 
     return await this.taskService.findOneOrFail(taskId);
   }

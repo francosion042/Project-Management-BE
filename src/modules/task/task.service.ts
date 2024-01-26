@@ -35,7 +35,7 @@ export class TaskService {
   async findOne(id: number) {
     return await this.taskRepository.findOne({
       where: { id },
-      relations: ['subTasks'],
+      relations: ['taskRequirements'],
     });
   }
 
@@ -43,7 +43,7 @@ export class TaskService {
     try {
       return await this.taskRepository.findOneOrFail({
         where: { id },
-        relations: ['project', 'taskColumn', 'subTasks'],
+        relations: ['project', 'taskColumn', 'taskRequirements'],
       });
     } catch (error) {
       throw new NotFoundException(error);

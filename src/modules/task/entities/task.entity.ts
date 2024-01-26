@@ -10,7 +10,7 @@ import { Project } from '../../project/entities/project.entity';
 import { User } from '../../user/entities/user.entity';
 import { TaskDifficulty, TaskPriority, TaskStatus } from './index.enum';
 import { TaskColumn } from '../../task-column/entities/task-column.entity';
-import { SubTask } from '../../sub-task/entities/sub-task.entity';
+import { TaskRequirement } from '../../task-requirement/entities/task-requirement.entity';
 
 @Entity('tasks')
 export class Task {
@@ -90,6 +90,6 @@ export class Task {
   @ManyToOne(() => User, (user) => user.tasksAssigned)
   assignee: User;
 
-  @OneToMany(() => SubTask, (subTask) => subTask.task)
-  subTasks: SubTask;
+  @OneToMany(() => TaskRequirement, (taskRequirement) => taskRequirement.task)
+  taskRequirements: TaskRequirement;
 }

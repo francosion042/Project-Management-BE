@@ -5,27 +5,21 @@ import {
   ManyToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
-import { SubTaskStatus } from './index.enum';
+import { TaskRequirementStatus } from './index.enum';
 import { Task } from '../../task/entities/task.entity';
 
-@Entity('sub_tasks')
-export class SubTask {
+@Entity('task_requirements')
+export class TaskRequirement {
   @PrimaryGeneratedColumn()
   id: number;
 
   @Column()
-  title: string;
-
-  @Column()
   description: string;
-
-  @Column({ type: 'jsonb' })
-  duration: object;
 
   @Column({
     type: 'enum',
-    enum: SubTaskStatus,
-    default: SubTaskStatus.IN_PROGRESS,
+    enum: TaskRequirementStatus,
+    default: TaskRequirementStatus.IN_PROGRESS,
   })
   status: string;
 
@@ -48,6 +42,6 @@ export class SubTask {
   @Column({ name: 'task_id' })
   taskId: number;
 
-  @ManyToOne(() => Task, (task) => task.subTasks)
+  @ManyToOne(() => Task, (task) => task.taskRequirements)
   task: Task;
 }
