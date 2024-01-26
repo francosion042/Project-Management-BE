@@ -3,6 +3,10 @@ interface Task {
   description: string;
 }
 
+interface TaskRequirement {
+  description: string;
+}
+
 interface CategoryTasks {
   [category: string]: Task[];
 }
@@ -65,4 +69,19 @@ export function extractTaskDescription(response: string): string {
   }
 
   return '';
+}
+
+export function extractTaskRequirements(response: string): TaskRequirement[] {
+  const taskRequirements: TaskRequirement[] = [];
+  const lines = response.split('\n');
+
+  for (const line of lines) {
+    if (startsWithNumberOrHyphen(line)) {
+      taskRequirements.push({
+        description: line.substring(2).trim(),
+      });
+    }
+  }
+
+  return taskRequirements;
 }

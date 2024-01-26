@@ -5,9 +5,16 @@ import { ApiIntegrationsModule } from '../api-integrations/api-integrations.modu
 import { ProjectModule } from '../project/project.module';
 import { TaskColumnModule } from '../task-column/task-column.module';
 import { TaskModule } from '../task/task.module';
+import { TaskRequirementModule } from '../task-requirement/task-requirement.module';
 
 @Module({
-  imports: [ApiIntegrationsModule, ProjectModule, TaskColumnModule, TaskModule],
+  imports: [
+    ApiIntegrationsModule,
+    ProjectModule,
+    TaskColumnModule,
+    TaskModule,
+    TaskRequirementModule,
+  ],
   controllers: [ArtificialIntelligenceController],
   providers: [ArtificialIntelligenceService],
   exports: [ArtificialIntelligenceService],

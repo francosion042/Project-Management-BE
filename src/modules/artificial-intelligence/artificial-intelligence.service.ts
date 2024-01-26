@@ -1,9 +1,14 @@
 import { Injectable } from '@nestjs/common';
 import { OpenAiService } from '../api-integrations/openAi.service';
-import { extractColumnsAndTasks, extractTasks } from './utils/index.util';
+import {
+  extractColumnsAndTasks,
+  extractTaskRequirements,
+  extractTasks,
+} from './utils/index.util';
 import { ProjectService } from '../project/project.service';
 import { TaskColumnService } from '../task-column/task-column.service';
 import { TaskService } from '../task/task.service';
+import { TaskRequirementService } from '../task-requirement/task-requirement.service';
 
 @Injectable()
 export class ArtificialIntelligenceService {
@@ -12,6 +17,7 @@ export class ArtificialIntelligenceService {
     private readonly projectService: ProjectService,
     private readonly taskColumnService: TaskColumnService,
     private readonly taskService: TaskService,
+    private readonly taskRequirementService: TaskRequirementService,
   ) {}
 
   async generateColumnsAndTasks(projectId: number) {
@@ -134,6 +140,12 @@ export class ArtificialIntelligenceService {
       prompt,
     });
     console.log(generatedResponse);
+
+    const extractedData = extractTaskRequirements(generatedResponse);
+
+    for (const data of extractedData) {
+      await this.taskRequirementService.create({ ...data, taskId });
+    }
 
     return await this.taskService.findOneOrFail(taskId);
   }
