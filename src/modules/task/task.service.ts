@@ -18,6 +18,8 @@ export class TaskService {
     const task = this.taskRepository.create(createTaskDto);
     task.creator = createTaskDto.creator;
 
+    // TODO: Add task Id to task order Ids in the column
+
     await this.taskRepository.save(task);
     return task;
   }
@@ -31,14 +33,17 @@ export class TaskService {
   }
 
   async findOne(id: number) {
-    return await this.taskRepository.findBy({ id });
+    return await this.taskRepository.findOne({
+      where: { id },
+      relations: ['subTasks'],
+    });
   }
 
   async findOneOrFail(id: number) {
     try {
       return await this.taskRepository.findOneOrFail({
         where: { id },
-        relations: ['taskColumn', 'project'],
+        relations: ['project', 'taskColumn', 'subTasks'],
       });
     } catch (error) {
       throw new NotFoundException(error);
@@ -54,7 +59,11 @@ export class TaskService {
     });
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} task`;
+  async remove(id: number) {
+    const task = await this.taskRepository.findOneOrFail({ where: { id } });
+
+    // TODO: Remove the task Id from the task order Ids in the column
+
+    return await this.taskRepository.remove(task);
   }
 }

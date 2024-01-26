@@ -36,13 +36,25 @@ export class TaskController {
   }
 
   @Get()
-  findAll() {
-    return this.taskService.findAll();
+  async findAll(@Param('project_id') projectId: number) {
+    const tasks = await this.taskService.findAllByProjectId(projectId);
+
+    return new BaseResponseDto(
+      200,
+      'Project Tasks Fetched Successfully',
+      tasks,
+    );
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.taskService.findOne(+id);
+  async findOne(@Param('id') id: string) {
+    const task = await this.taskService.findOneOrFail(+id);
+
+    return new BaseResponseDto(
+      200,
+      'Task Details Retrieved Successfully',
+      task,
+    );
   }
 
   @Patch(':id')
@@ -51,7 +63,9 @@ export class TaskController {
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.taskService.remove(+id);
+  async remove(@Param('id') id: string) {
+    await this.taskService.remove(+id);
+
+    return new BaseResponseDto(200, 'Task Deleted  Successfully');
   }
 }

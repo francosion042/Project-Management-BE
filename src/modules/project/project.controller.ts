@@ -53,7 +53,9 @@ export class ProjectController {
     return new BaseResponseDto(200, 'Project Updated Successfully', project);
   }
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.projectService.remove(+id);
+  async remove(@Param('id') id: string) {
+    await this.projectService.remove(+id);
+
+    return new BaseResponseDto(200, 'Project Deleted Successfully');
   }
 }

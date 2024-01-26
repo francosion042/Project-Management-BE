@@ -45,7 +45,10 @@ export class ProjectService {
     return await this.projectRepository.findOneOrFail({ where: { id } });
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} project`;
+  async remove(id: number) {
+    const project = await this.projectRepository.findOneOrFail({
+      where: { id },
+    });
+    return await this.projectRepository.remove(project);
   }
 }
