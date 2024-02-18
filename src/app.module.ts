@@ -4,27 +4,19 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { AuthModule } from './modules/auth/auth.module';
 import { UserModule } from './modules/user/user.module';
-import { UserController } from './modules/user/user.controller';
 import { DatabaseModule } from './database/database.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { DatabaseService } from './database/database.service';
 import { ProjectModule } from './modules/project/project.module';
-import { ProjectController } from './modules/project/project.controller';
 import { ProjectCollaborationModule } from './modules/project-collaboration/project-collaboration.module';
-import { ProjectCollaborationController } from './modules/project-collaboration/project-collaboration.controller';
 import { ProjectCollaborationInviteModule } from './modules/project-collaboration-invite/project-collaboration-invite.module';
 import { MailerModule } from './modules/mailer/mailer.module';
 import { EventEmitterModule } from '@nestjs/event-emitter';
-import { ProjectCollaborationInviteController } from './modules/project-collaboration-invite/project-collaboration-invite.controller';
 import { TaskModule } from './modules/task/task.module';
-import { TaskController } from './modules/task/task.controller';
 import { TaskColumnModule } from './modules/task-column/task-column.module';
-import { TaskColumnController } from './modules/task-column/task-column.controller';
 import { ApiIntegrationsModule } from './modules/api-integrations/api-integrations.module';
 import { ArtificialIntelligenceModule } from './modules/artificial-intelligence/artificial-intelligence.module';
-import { ArtificialIntelligenceController } from './modules/artificial-intelligence/artificial-intelligence.controller';
 import { TaskRequirementModule } from './modules/task-requirement/task-requirement.module';
-import { TaskRequirementController } from './modules/task-requirement/task-requirement.controller';
 
 @Module({
   imports: [
@@ -48,17 +40,7 @@ import { TaskRequirementController } from './modules/task-requirement/task-requi
       inject: [DatabaseService],
     }),
   ],
-  controllers: [
-    AppController,
-    UserController,
-    TaskController,
-    ProjectController,
-    TaskColumnController,
-    TaskRequirementController,
-    ProjectCollaborationController,
-    ProjectCollaborationInviteController,
-    ArtificialIntelligenceController,
-  ],
+  controllers: [AppController],
   providers: [AppService],
 })
 export class AppModule {}
