@@ -34,5 +34,5 @@ export function getInitials(sentence: string) {
   const initials = words.map((word) => word.charAt(0));
 
   // Join the initials to form the result
-  return initials.join('');
+  return initials.join('').toUpperCase();
 }

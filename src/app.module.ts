@@ -17,6 +17,7 @@ import { TaskColumnModule } from './modules/task-column/task-column.module';
 import { ApiIntegrationsModule } from './modules/api-integrations/api-integrations.module';
 import { ArtificialIntelligenceModule } from './modules/artificial-intelligence/artificial-intelligence.module';
 import { TaskRequirementModule } from './modules/task-requirement/task-requirement.module';
+import { IsUniqueConstraint } from './common/custom-validators/is-unique.validator';
 
 @Module({
   imports: [
@@ -41,6 +42,10 @@ import { TaskRequirementModule } from './modules/task-requirement/task-requireme
     }),
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [
+    AppService,
+    // registered custom class
+    IsUniqueConstraint,
+  ],
 })
 export class AppModule {}

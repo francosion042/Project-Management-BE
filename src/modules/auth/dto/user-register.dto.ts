@@ -1,4 +1,5 @@
 import { IsEmail, IsNotEmpty, MinLength, IsPhoneNumber } from 'class-validator';
+import { isUnique } from '../../../common/custom-validators/index.decorator';
 
 export class UserRegisterDto {
   @IsNotEmpty()
@@ -9,6 +10,7 @@ export class UserRegisterDto {
 
   @IsEmail()
   @IsNotEmpty()
+  @isUnique({ tableName: 'users', column: 'email' })
   email: string;
 
   @IsNotEmpty()
